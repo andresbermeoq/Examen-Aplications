@@ -8,6 +8,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Gestion de Pedidos</h1>
+        
+        <a href="Comida.xhtml">Comida</a>
+        <a>Pedidos</a>
     </body>
 </html>

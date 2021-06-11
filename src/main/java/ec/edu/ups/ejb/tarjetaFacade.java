@@ -9,7 +9,7 @@ import ec.edu.ups.entidad.tarjeta;
 @Stateless
 public class tarjetaFacade extends AbstractFacade<tarjeta> {
 	
-	@PersistenceContext(unitName = "Jdbc/__Products")
+	@PersistenceContext(unitName = "Pedidos")
 	private EntityManager entityManager;
 
 	public tarjetaFacade() {

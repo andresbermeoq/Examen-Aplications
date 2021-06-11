@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Comida</title>
+</h:head> 
+<body> 
+
+	<h1>Gestion de Comida</h1>
+	
+	<hr />
+	
+	<h:form>
+		<h:outputLabel value="Nombre de la Comida: " />
+		<h:inputText id="nombre" value="#{comidaBean.nombre}" />
+		<br></br>
+		
+		<h:outputLabel value="Precio Unitario: " />
+		<h:inputText id="precio" value="#{comidaBean.precioUnitario}" />
+		<br></br>
+		
+		<h:commandButton action="#{comidaBean.addComida()}" value="Crear" />
+		
+		<h:dataTable value="#{comidaBean.tarjetas}" var="t">
+			<h:column>
+				<h:outputText value="#{t.nombreTitular}" />
+			</h:column>
+			<h:column>
+				<h:outputText value="#{t.numeroTarjeta}" />
+			</h:column>
+			
+		</h:dataTable>
+	</h:form>
+	
+	
+
+</body> 
+</html>

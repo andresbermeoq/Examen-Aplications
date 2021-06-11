@@ -9,7 +9,7 @@ import ec.edu.ups.entidad.comida;
 @Stateless
 public class comidaFacade extends AbstractFacade<comida> {
 	
-	@PersistenceContext(unitName = "Jdbc/__Products")
+	@PersistenceContext(unitName = "Pedidos")
 	private EntityManager entityManager;
 
 	public comidaFacade() {

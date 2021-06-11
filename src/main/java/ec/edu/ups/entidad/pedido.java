@@ -1,6 +1,7 @@
 package ec.edu.ups.entidad;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -46,7 +47,7 @@ public class pedido implements Serializable {
 
 	//bi-directional one-to-one association to tarjeta
 	@OneToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="id", insertable = false, updatable = false)
 	private tarjeta tarjeta;
 
 	public pedido() {

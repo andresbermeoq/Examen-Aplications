@@ -31,10 +31,6 @@ public class tarjeta implements Serializable {
 	@Column(name="numero_tarjeta")
 	private String numeroTarjeta;
 
-	//bi-directional one-to-one association to pedido
-	@OneToOne(mappedBy="tarjeta")
-	private pedido pedido;
-
 	public tarjeta() {
 	}
 
@@ -76,14 +72,6 @@ public class tarjeta implements Serializable {
 
 	public void setNumeroTarjeta(String numeroTarjeta) {
 		this.numeroTarjeta = numeroTarjeta;
-	}
-
-	public pedido getPedido() {
-		return this.pedido;
-	}
-
-	public void setPedido(pedido pedido) {
-		this.pedido = pedido;
 	}
 
 }

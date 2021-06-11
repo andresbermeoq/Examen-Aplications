@@ -9,7 +9,7 @@ import ec.edu.ups.entidad.pedido;
 @Stateless
 public class pedidoFacade extends AbstractFacade<pedido> {
 	
-	@PersistenceContext(unitName = "Jdbc/__Products")
+	@PersistenceContext(unitName = "Pedidos")
 	private EntityManager entityManager;
 
 

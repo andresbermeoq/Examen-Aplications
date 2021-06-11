@@ -26,11 +26,18 @@ public class comida implements Serializable {
 
 	//bi-directional many-to-one association to pedido
 	@ManyToOne
-	@JoinColumn(name="pedidos_fk")
+	@JoinColumn(name="pedidos_fk" , insertable = false, updatable = false)
 	private pedido pedido;
 
 	public comida() {
 	}
+	
+	public comida(String nombre, BigDecimal precioUnitario) {
+		super();
+		this.nombre = nombre;
+		this.precioUnitario = precioUnitario;
+	}
+
 
 	public Integer getId() {
 		return this.id;
