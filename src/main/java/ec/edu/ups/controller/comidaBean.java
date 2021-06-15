@@ -1,6 +1,7 @@
 package ec.edu.ups.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,9 +11,8 @@ import javax.faces.annotation.FacesConfig;
 import javax.inject.Named;
 
 import ec.edu.ups.ejb.comidaFacade;
-import ec.edu.ups.ejb.tarjetaFacade;
 import ec.edu.ups.entidad.comida;
-import ec.edu.ups.entidad.tarjeta;
+
 
 @FacesConfig(version = FacesConfig.Version.JSF_2_3)
 @Named
@@ -24,17 +24,14 @@ public class comidaBean implements Serializable {
 	@EJB
 	private comidaFacade comidaFacade;
 	
-	@EJB
-	private tarjetaFacade tarjetaFacade;
-	
 	private String nombre;
 	private Double precioUnitario;
 	
-	private List<tarjeta> tarjetas;
+	private List<comida> comidas;
 	
 	@PostConstruct
 	public void init() {
-		tarjetas = tarjetaFacade.findAll();
+		comidas = comidaFacade.findAll();
 	}
 	
 	
@@ -58,29 +55,21 @@ public class comidaBean implements Serializable {
 		this.precioUnitario = precioUnitario;
 	}
 	
-	public List<tarjeta> getTarjetas() {
-		return tarjetas;
-	}
-
-	public void setTarjetas(List<tarjeta> tarjetas) {
-		this.tarjetas = tarjetas;
-	}
-	
-	public String addComida() {
-		
-		return null;
+	public List<comida> getComidas() {
+		return comidas;
 	}
 
 
+	public void setComidas(List<comida> comidas) {
+		this.comidas = comidas;
+	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
+	public void addComida() {
+		comidaFacade.create(new comida(this.nombre, this.precioUnitario));
+		comidas = comidaFacade.findAll();
+	}
+
 	
 
 	

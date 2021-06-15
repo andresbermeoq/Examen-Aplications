@@ -19,13 +19,15 @@ public class comida implements Serializable {
 	@Column(name="precio_unitario")
 	private Double precioUnitario;
 	
-	@ManyToOne
-	@JoinColumn(name = "pedido_id")
-	private pedido pedido;
-
+	
 	public comida() {
 	}
-	
+		
+	public comida(String nombre, Double precioUnitario) {
+		this.nombre = nombre;
+		this.precioUnitario = precioUnitario;
+	}
+
 	public Integer getId() {
 		return this.id;
 	}
@@ -52,8 +54,7 @@ public class comida implements Serializable {
 
 	@Override
 	public String toString() {
-		return "comida [id=" + id + ", nombre=" + nombre + ", precioUnitario=" + precioUnitario + ", pedido=" + pedido
-				+ "]";
+		return "comida [id=" + id + ", nombre=" + nombre + ", precioUnitario=" + precioUnitario + "]";
 	}
 	
 	

@@ -10,5 +10,127 @@
 </h:head> 
 <body> 
 
+	<h1>Gestion de Pedido</h1>
+	
+	<hr />
+	
+	<h:form>
+	
+		<h2>Seleccione una Tarjeta</h2>
+		
+		<h:selectOneMenu value="#{pedidoBean.idTarjeta}">
+			<f:selectItems value="#{pedidoBean.tarjetas}" var="t" itemValue="#{t.id}" itemLabel="#{t.numeroTarjeta}"/>
+		</h:selectOneMenu>
+		
+		<hr />
+		
+		<h:outputLabel value="Nombre del Cliente: " />
+		<h:inputText id="nombreCliente" value="#{pedidoBean.nombreCliente}" />
+		<br></br>
+		
+		<h:outputLabel value="Observaciones: " />
+		<h:inputText id="observaciones" value="#{pedidoBean.observaciones}" />
+		<br></br>
+		
+		<h:outputLabel value="Fecha: " />
+		<h:inputText id="fecha" value="#{pedidoBean.fecha}"  converterMessage="El Modelo es: yyyy-mm-dd">
+			<f:convertDateTime pattern="yyyy-mm-dd"/>
+		</h:inputText>
+		<br></br>
+		
+		<hr />
+		
+		<h2>Creacion de Comidas</h2>
+		
+		<h:outputLabel value="Nombre de la Comida: " />
+		<h:inputText id="nombre" value="#{pedidoBean.nombreComida}" />
+		<br></br>
+		
+		<h:outputLabel value="Precio Unitario: " />
+		<h:inputText id="precio" value="#{pedidoBean.precioUnitario}" />
+		<br></br>
+		
+		<hr />
+		
+		<h:commandButton action="#{pedidoBean.addComida()}" value="Agregar Comida" />
+		
+		<hr />
+		
+		<h:dataTable value="#{pedidoBean.comidas}" var="t">
+			<h:column>
+				<h:outputText value="#{t.nombre}" />
+			</h:column>
+			<h:column>
+				<h:outputText value="#{t.precioUnitario}" />
+			</h:column>
+		</h:dataTable>
+			
+		<hr />
+		
+
+		<h:outputLabel value="Subtotal: " />
+		<h:outputText value="#{pedidoBean.subtotal}" />
+		<br></br>
+		
+		<h:outputLabel value="IVA: " />
+		<h:outputText value="#{pedidoBean.iva}" />
+		<br></br>
+		
+		<h:outputLabel value="Total: " />
+		<h:outputText value="#{pedidoBean.total}" />
+		<br></br>
+		
+		<h:commandButton action="#{pedidoBean.addPedido()}" value="Crear" />
+		
+		<hr />
+		
+	</h:form>
+	
+	<h:form>
+	
+		<h:panelGrid columns="2">
+				<h:dataTable value="#{pedidoBean.pedidos}" var="p">
+					<h:column>
+						<f:facet name="header">Cliente</f:facet>
+						<h:outputText value="#{p.nombreCliente}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Numero de Tarjeta</f:facet>
+						<h:outputText value="#{p.tarjeta.numeroTarjeta}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Comidas</f:facet>
+						<h:dataTable value="#{p.comidas}" var="c">
+							<h:column>
+								<f:facet name="header">Nombre de Comida</f:facet>
+								<h:outputText value="#{c.nombre}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Precio de Comida</f:facet>
+								<h:outputText value="#{c.precioUnitario}" />
+							</h:column>
+						</h:dataTable>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Subtotal</f:facet>
+						<h:outputText value="#{p.subtotal}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">IVA</f:facet>
+						<h:outputText value="#{p.iva}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Total</f:facet>
+						<h:outputText value="#{p.total}" />
+					</h:column>
+				</h:dataTable>
+		
+		</h:panelGrid>
+		
+		
+	</h:form>
+	
+	
+
 </body> 
 </html>

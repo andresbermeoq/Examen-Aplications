@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +38,7 @@ public class pedido implements Serializable {
 	private Double total;
 	private String observaciones;
 	
-	@OneToMany(mappedBy = "pedido")
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<comida> comidas;
 	
 	
@@ -48,6 +50,22 @@ public class pedido implements Serializable {
 	public pedido() {
 		
 	}
+	
+	
+
+	public pedido(Date date, String nombreCliente, Double subtotal, Double iva, Double total, String observaciones,
+			List<comida> comidas, ec.edu.ups.entidad.tarjeta tarjeta) {
+		super();
+		this.date = date;
+		this.nombreCliente = nombreCliente;
+		this.subtotal = subtotal;
+		this.iva = iva;
+		this.total = total;
+		this.observaciones = observaciones;
+		this.comidas = comidas;
+		this.tarjeta = tarjeta;
+	}
+
 
 
 	public Integer getId() {

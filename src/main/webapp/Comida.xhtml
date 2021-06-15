@@ -14,6 +14,9 @@
 	<hr />
 	
 	<h:form>
+		
+		<h2>Creacion de Comidas</h2>
+		
 		<h:outputLabel value="Nombre de la Comida: " />
 		<h:inputText id="nombre" value="#{comidaBean.nombre}" />
 		<br></br>
@@ -22,20 +25,18 @@
 		<h:inputText id="precio" value="#{comidaBean.precioUnitario}" />
 		<br></br>
 		
+		<hr />
+		
 		<h:commandButton action="#{comidaBean.addComida()}" value="Crear" />
 		
-		<h1>Seleccion de Tarjetas</h1>
+		<hr />
 		
-		<h:selectOneMenu value="hola" var="t">
-			<f:selectItem itemLabel=""/>
-		</h:selectOneMenu>
-		
-		<h:dataTable value="#{comidaBean.tarjetas}" var="t">
+		<h:dataTable value="#{comidaBean.comidas}" var="t">
 			<h:column>
-				<h:outputText value="#{t.nombreTitular}" />
+				<h:outputText value="#{t.nombre}" />
 			</h:column>
 			<h:column>
-				<h:outputText value="#{t.numeroTarjeta}" />
+				<h:outputText value="#{t.precioUnitario}" />
 			</h:column>
 		</h:dataTable>
 	</h:form>
