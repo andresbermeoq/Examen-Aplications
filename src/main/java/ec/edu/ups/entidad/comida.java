@@ -2,15 +2,10 @@ package ec.edu.ups.entidad;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 
-/**
- * The persistent class for the "Comida" database table.
- * 
- */
 @Entity
-@Table(name="\"Comida\"")
+@Table(name="Comida", schema = "public")
 @NamedQuery(name="comida.findAll", query="SELECT c FROM comida c")
 public class comida implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,23 +17,15 @@ public class comida implements Serializable {
 	private String nombre;
 
 	@Column(name="precio_unitario")
-	private BigDecimal precioUnitario;
-
-	//bi-directional many-to-one association to pedido
+	private Double precioUnitario;
+	
 	@ManyToOne
-	@JoinColumn(name="pedidos_fk" , insertable = false, updatable = false)
+	@JoinColumn(name = "pedido_id")
 	private pedido pedido;
 
 	public comida() {
 	}
 	
-	public comida(String nombre, BigDecimal precioUnitario) {
-		super();
-		this.nombre = nombre;
-		this.precioUnitario = precioUnitario;
-	}
-
-
 	public Integer getId() {
 		return this.id;
 	}
@@ -55,20 +42,20 @@ public class comida implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public BigDecimal getPrecioUnitario() {
+	public Double getPrecioUnitario() {
 		return this.precioUnitario;
 	}
 
-	public void setPrecioUnitario(BigDecimal precioUnitario) {
+	public void setPrecioUnitario(Double precioUnitario) {
 		this.precioUnitario = precioUnitario;
 	}
 
-	public pedido getPedido() {
-		return this.pedido;
+	@Override
+	public String toString() {
+		return "comida [id=" + id + ", nombre=" + nombre + ", precioUnitario=" + precioUnitario + ", pedido=" + pedido
+				+ "]";
 	}
-
-	public void setPedido(pedido pedido) {
-		this.pedido = pedido;
-	}
+	
+	
 
 }

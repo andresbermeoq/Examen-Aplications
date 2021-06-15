@@ -24,6 +24,12 @@
 		
 		<h:commandButton action="#{comidaBean.addComida()}" value="Crear" />
 		
+		<h1>Seleccion de Tarjetas</h1>
+		
+		<h:selectOneMenu value="hola" var="t">
+			<f:selectItem itemLabel=""/>
+		</h:selectOneMenu>
+		
 		<h:dataTable value="#{comidaBean.tarjetas}" var="t">
 			<h:column>
 				<h:outputText value="#{t.nombreTitular}" />
@@ -31,7 +37,6 @@
 			<h:column>
 				<h:outputText value="#{t.numeroTarjeta}" />
 			</h:column>
-			
 		</h:dataTable>
 	</h:form>
 	

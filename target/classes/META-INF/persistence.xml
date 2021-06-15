@@ -3,7 +3,16 @@
 	<persistence-unit name="Pedidos" transaction-type="JTA">
 		<jta-data-source>Jdbc/__Products</jta-data-source>
 		<class>ec.edu.ups.entidad.comida</class>
-		<class>ec.edu.ups.entidad.pedido</class>
 		<class>ec.edu.ups.entidad.tarjeta</class>
+		<class>ec.edu.ups.entidad.pedido</class>
+		<properties>
+			<property name="eclipselink.ddl-generation" value="create-tables"/>
+			<property name="eclipselink.logging.level" value="FINE" />
+			<property name="eclipselink.ddl-generation.output-mode" value="database" />
+			<property name="javax.persistence.schema-generation.database.action" value="none"/>
+			<property name="javax.persistence.schema-generation.scripts.action" value="none"/>
+		</properties>
 	</persistence-unit>
+	
+
 </persistence>

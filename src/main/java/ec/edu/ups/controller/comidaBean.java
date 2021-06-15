@@ -1,7 +1,6 @@
 package ec.edu.ups.controller;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -29,7 +28,7 @@ public class comidaBean implements Serializable {
 	private tarjetaFacade tarjetaFacade;
 	
 	private String nombre;
-	private BigDecimal precioUnitario;
+	private Double precioUnitario;
 	
 	private List<tarjeta> tarjetas;
 	
@@ -51,11 +50,11 @@ public class comidaBean implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public BigDecimal getPrecioUnitario() {
+	public Double getPrecioUnitario() {
 		return precioUnitario;
 	}
 
-	public void setPrecioUnitario(BigDecimal precioUnitario) {
+	public void setPrecioUnitario(Double precioUnitario) {
 		this.precioUnitario = precioUnitario;
 	}
 	
@@ -68,7 +67,7 @@ public class comidaBean implements Serializable {
 	}
 	
 	public String addComida() {
-		comidaFacade.create(new comida(this.nombre, this.precioUnitario));
+		
 		return null;
 	}
 

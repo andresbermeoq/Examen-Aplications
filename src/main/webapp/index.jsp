@@ -11,6 +11,7 @@
         <h1>Gestion de Pedidos</h1>
         
         <a href="Comida.xhtml">Comida</a>
-        <a>Pedidos</a>
+        <br />
+        <a href="Pedidos.xhtml">Pedidos</a>
     </body>
 </html>

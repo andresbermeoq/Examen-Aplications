@@ -1,158 +1,157 @@
 package ec.edu.ups.entidad;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-/**
- * The persistent class for the "Pedidos" database table.
- * 
- */
 @Entity
-@Table(name="\"Pedidos\"")
+@Table(name="Pedido", schema = "public")
 @NamedQuery(name="pedido.findAll", query="SELECT p FROM pedido p")
 public class pedido implements Serializable {
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-
-	@Temporal(TemporalType.DATE)
-	private Date fecha;
-
-	private BigDecimal iva;
-
-	@Column(name="nombre_cliente")
+	
+	private Date date;
+	
+	@Column(name = "nombre_cliente")
 	private String nombreCliente;
-
-	private Integer numero;
-
+	
+	private Double subtotal;
+	private Double iva;
+	private Double total;
 	private String observaciones;
-
-	private BigDecimal subtotal;
-
-	@Column(name="tarjeta_fk")
-	private Integer tarjetaFk;
-
-	private BigDecimal total;
-
-	//bi-directional many-to-one association to comida
-	@OneToMany(mappedBy="pedido")
+	
+	@OneToMany(mappedBy = "pedido")
 	private List<comida> comidas;
-
-	//bi-directional one-to-one association to tarjeta
-	@OneToOne
-	@JoinColumn(name="id", insertable = false, updatable = false)
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "tarjeta_id")
 	private tarjeta tarjeta;
 
+
 	public pedido() {
+		
 	}
 
+
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
+
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Date getFecha() {
-		return this.fecha;
+
+	public Date getDate() {
+		return date;
 	}
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
-	public BigDecimal getIva() {
-		return this.iva;
-	}
-
-	public void setIva(BigDecimal iva) {
-		this.iva = iva;
-	}
 
 	public String getNombreCliente() {
-		return this.nombreCliente;
+		return nombreCliente;
 	}
+
 
 	public void setNombreCliente(String nombreCliente) {
 		this.nombreCliente = nombreCliente;
 	}
 
-	public Integer getNumero() {
-		return this.numero;
+
+	public Double getSubtotal() {
+		return subtotal;
 	}
 
-	public void setNumero(Integer numero) {
-		this.numero = numero;
+
+	public void setSubtotal(Double subtotal) {
+		this.subtotal = subtotal;
 	}
+
+
+	public Double getIva() {
+		return iva;
+	}
+
+
+	public void setIva(Double iva) {
+		this.iva = iva;
+	}
+
+
+	public Double getTotal() {
+		return total;
+	}
+
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
 
 	public String getObservaciones() {
-		return this.observaciones;
+		return observaciones;
 	}
+
 
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
 
-	public BigDecimal getSubtotal() {
-		return this.subtotal;
-	}
-
-	public void setSubtotal(BigDecimal subtotal) {
-		this.subtotal = subtotal;
-	}
-
-	public Integer getTarjetaFk() {
-		return this.tarjetaFk;
-	}
-
-	public void setTarjetaFk(Integer tarjetaFk) {
-		this.tarjetaFk = tarjetaFk;
-	}
-
-	public BigDecimal getTotal() {
-		return this.total;
-	}
-
-	public void setTotal(BigDecimal total) {
-		this.total = total;
-	}
 
 	public List<comida> getComidas() {
-		return this.comidas;
+		return comidas;
 	}
+
 
 	public void setComidas(List<comida> comidas) {
 		this.comidas = comidas;
 	}
 
-	public comida addComida(comida comida) {
-		getComidas().add(comida);
-		comida.setPedido(this);
-
-		return comida;
-	}
-
-	public comida removeComida(comida comida) {
-		getComidas().remove(comida);
-		comida.setPedido(null);
-
-		return comida;
-	}
 
 	public tarjeta getTarjeta() {
-		return this.tarjeta;
+		return tarjeta;
 	}
+
 
 	public void setTarjeta(tarjeta tarjeta) {
 		this.tarjeta = tarjeta;
 	}
+
+
+	@Override
+	public String toString() {
+		return "pedido [id=" + id + ", date=" + date + ", nombreCliente=" + nombreCliente + ", subtotal=" + subtotal
+				+ ", iva=" + iva + ", total=" + total + ", observaciones=" + observaciones + ", comidas=" + comidas
+				+ ", tarjeta=" + tarjeta + "]";
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

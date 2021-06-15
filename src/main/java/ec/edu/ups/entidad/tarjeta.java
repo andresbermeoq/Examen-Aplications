@@ -3,14 +3,11 @@ package ec.edu.ups.entidad;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
-/**
- * The persistent class for the "Tarjetas" database table.
- * 
- */
 @Entity
-@Table(name="\"Tarjetas\"")
+@Table(name="Tarjeta", schema = "public")
 @NamedQuery(name="tarjeta.findAll", query="SELECT t FROM tarjeta t")
 public class tarjeta implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -30,7 +27,10 @@ public class tarjeta implements Serializable {
 
 	@Column(name="numero_tarjeta")
 	private String numeroTarjeta;
-
+	
+	@OneToMany(mappedBy = "tarjeta")
+	private List<pedido> pedidos;
+	
 	public tarjeta() {
 	}
 
@@ -74,4 +74,20 @@ public class tarjeta implements Serializable {
 		this.numeroTarjeta = numeroTarjeta;
 	}
 
+	public List<pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	@Override
+	public String toString() {
+		return "tarjeta [id=" + id + ", cvv=" + cvv + ", fechaCaducidad=" + fechaCaducidad + ", nombreTitular="
+				+ nombreTitular + ", numeroTarjeta=" + numeroTarjeta + ", pedidos=" + pedidos + "]";
+	}
+	
+	
+	
 }
