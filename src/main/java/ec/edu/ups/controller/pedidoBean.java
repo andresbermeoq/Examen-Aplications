@@ -11,6 +11,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.inject.Named;
 
+import org.eclipse.persistence.internal.oxm.record.deferred.IgnorableWhitespaceEvent;
 
 import ec.edu.ups.ejb.comidaFacade;
 import ec.edu.ups.ejb.pedidoFacade;
@@ -53,13 +54,15 @@ public class pedidoBean implements Serializable{
 	private pedido pedido;
 	
 	private List<pedido> pedidos;
+	private List<pedido> pedidosEnList;
 	
-	private String mensaje;
+	private String busqueda;
 	
 	@PostConstruct
 	public void init() {
 		setTarjetas(tarjetaFacade.findAll());
 		comidas = new ArrayList<>();
+		pedidosEnList = new ArrayList<>();
 		pedidos = pedidoFacade.findAll();
 		comidaPedido = new comida();
 		pedido = new pedido();
@@ -81,42 +84,6 @@ public class pedidoBean implements Serializable{
 		this.tarjeta = tarjeta;
 	}
 	
-	public void addComida() {
-		comidaPedido.setNombre(this.nombreComida);
-		comidaPedido.setPrecioUnitario(this.precioUnitario);
-		comidas.add(comidaPedido);
-		
-		Double sum = 0.0;
-		
-		for(comida d: comidas) {
-			sum += d.getPrecioUnitario();
-		}
-		
-		this.subtotal = sum;
-		this.iva = (12 * this.subtotal) / 100;
-		this.total = this.subtotal + this.iva;
-		
-		comidaPedido = new comida();
-	}
-	
-	
-	public void addPedido() {
-		tarjeta = tarjetaFacade.find(Integer.valueOf(getIdTarjeta()));	
-		pedido.setTarjeta(tarjeta);
-		pedido.setNombreCliente(nombreCliente);
-		pedido.setTotal(total);
-		pedido.setSubtotal(subtotal);
-		pedido.setIva(iva);
-		pedido.setComidas(comidas);
-		pedido.setDate(new java.sql.Date(fecha.getDate()));
-		pedido.setObservaciones(observaciones);
-		
-		setMensaje(pedido.toString());
-		
-		pedidoFacade.create(pedido);	
-		
-	}
-
 	public List<tarjeta> getTarjetas() {
 		return tarjetas;
 	}
@@ -229,14 +196,6 @@ public class pedidoBean implements Serializable{
 		this.fecha = fecha;
 	}
 
-	public String getMensaje() {
-		return mensaje;
-	}
-
-	public void setMensaje(String mensaje) {
-		this.mensaje = mensaje;
-	}
-
 	public List<pedido> getPedidos() {
 		return pedidos;
 	}
@@ -244,7 +203,72 @@ public class pedidoBean implements Serializable{
 	public void setPedidos(List<pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
+
+	public String getBusqueda() {
+		return busqueda;
+	}
+
+	public void setBusqueda(String busqueda) {
+		this.busqueda = busqueda;
+	}
 	
+	public List<pedido> getPedidosEnList() {
+		return pedidosEnList;
+	}
+
+	public void setPedidosEnList(List<pedido> pedidosEnList) {
+		this.pedidosEnList = pedidosEnList;
+	}
+	
+	
+	public void addComida() {
+		comidaPedido.setNombre(this.nombreComida);
+		comidaPedido.setPrecioUnitario(this.precioUnitario);
+		comidas.add(comidaPedido);
+		
+		Double sum = 0.0;
+		
+		for(comida d: comidas) {
+			sum += d.getPrecioUnitario();
+		}
+		
+		this.subtotal = sum;
+		this.iva = (12 * this.subtotal) / 100;
+		this.total = this.subtotal + this.iva;
+		
+		comidaPedido = new comida();
+	}
+	
+	
+	public void addPedido() {
+		tarjeta = tarjetaFacade.find(Integer.valueOf(getIdTarjeta()));	
+		pedido.setTarjeta(tarjeta);
+		pedido.setNombreCliente(nombreCliente);
+		pedido.setTotal(total);
+		pedido.setSubtotal(subtotal);
+		pedido.setIva(iva);
+		pedido.setComidas(comidas);
+		pedido.setDate(new java.sql.Date(fecha.getDate()));
+		pedido.setObservaciones(observaciones);
+		
+		pedidoFacade.create(pedido);	
+		
+	}
+	
+	public void listPedidos(String busca) {
+		for(pedido ped: pedidoFacade.findAll()) {
+			if((ped.getTarjeta().getNumeroTarjeta().equals(busca))) {
+				pedidosEnList.add(ped);
+			}else {
+				for(comida com: ped.getComidas()) {
+					if(com.getNombre().equals(busca)) {
+						pedidosEnList.add(ped);
+					}
+				}
+			}
+		}
+	}
+
 	
 	
 

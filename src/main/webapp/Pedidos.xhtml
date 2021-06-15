@@ -88,6 +88,56 @@
 	
 	<h:form>
 	
+		<h:outputLabel value="Busqueda por Tarjeta o Comida" />
+		<br></br>
+		<h:inputText value="#{pedidoBean.busqueda}" />
+		<br></br>
+		<h:commandButton action="#{pedidoBean.listPedidos(pedidoBean.busqueda)}" value="Buscar" />
+	
+		<hr />
+		
+		
+		<h:panelGrid columns="2">
+				<h:dataTable value="#{pedidoBean.pedidosEnList}" var="p">
+					<h:column>
+						<f:facet name="header">Cliente</f:facet>
+						<h:outputText value="#{p.nombreCliente}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Numero de Tarjeta</f:facet>
+						<h:outputText value="#{p.tarjeta.numeroTarjeta}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Comidas</f:facet>
+						<h:dataTable value="#{p.comidas}" var="c">
+							<h:column>
+								<f:facet name="header">Nombre de Comida</f:facet>
+								<h:outputText value="#{c.nombre}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Precio de Comida</f:facet>
+								<h:outputText value="#{c.precioUnitario}" />
+							</h:column>
+						</h:dataTable>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Subtotal</f:facet>
+						<h:outputText value="#{p.subtotal}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">IVA</f:facet>
+						<h:outputText value="#{p.iva}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Total</f:facet>
+						<h:outputText value="#{p.total}" />
+					</h:column>
+				</h:dataTable>
+		
+		</h:panelGrid>
+		
+		<hr />
+		
 		<h:panelGrid columns="2">
 				<h:dataTable value="#{pedidoBean.pedidos}" var="p">
 					<h:column>
